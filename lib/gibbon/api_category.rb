@@ -44,6 +44,7 @@ module Gibbon
     def method_missing(method, *args)
       # To support underscores, we replace them with hyphens when calling the API
       method = method.to_s.gsub("_", "-").downcase
+      method = 'send' if method=='send_campaign' # kludge to allow send (JL)
       call("#{@category_name}/#{method}", *args)
     end
   
